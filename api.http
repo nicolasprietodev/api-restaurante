@@ -1,0 +1,245 @@
+# ---------------------------------------------------------------------
+# CONSULTAS DE RESTAURANTES
+# ---------------------------------------------------------------------
+### Obtener todos los restaurantes
+GET http://localhost:1235/restaurante/restaurants
+### Resttaurante por ID
+GET http://localhost:1235/restaurante/restaurants/1
+### Crear restaurante
+POST http://localhost:1235/restaurante/restaurants
+Content-Type: application/json
+
+{
+  "restaurantName": "Nuevo restaurante",
+  "address": "Dirección del nuevo restaurante",
+  "contactInfo": "Descripción del nuevo restaurante"
+}
+### Editar restaurante
+PATCH http://localhost:1235/restaurante/restaurants/15
+Content-Type: application/json
+
+{
+  "restaurantName": "Restaurante editado 14",
+  "address": "editado dirección del restaurante",
+  "contactInfo": "editado descripción del restaurante"
+}
+### Borrrar restaurante
+DELETE http://localhost:1235/restaurante/restaurants/13
+
+# ---------------------------------------------------------------------
+# CONSULTAS DE ROLES
+# ---------------------------------------------------------------------
+### Obtener todos los roles
+GET http://localhost:1235/restaurante/roles
+### Obtener rol por ID
+GET http://localhost:1235/restaurante/roles/1
+### Crear rol
+POST http://localhost:1235/restaurante/roles
+Content-Type: application/json
+
+{
+  "roleName": "Nuevo rol"
+}
+
+### Editar rol
+
+PATCH http://localhost:1235/restaurante/roles/3
+Content-Type: application/json
+
+{
+  "roleName": "Rol editado"
+}
+
+### Borrar rol
+
+DELETE http://localhost:1235/restaurante/roles/3
+
+# ---------------------------------------------------------------------
+# CONSULTAS DE USERS
+# ---------------------------------------------------------------------
+### Obtener users
+GET http://localhost:1235/restaurante/users
+### Obtener user por ID
+GET http://localhost:1235/restaurante/users/1
+### Crear un user
+POST http://localhost:1235/restaurante/users
+Content-Type: application/json
+
+{
+  "username": "nuevo_usuario35",
+  "password": "contrasegurisisisisima123",
+  "restaurantId": 1,
+  "roleId": 1,
+  "isActive": 1
+}
+
+### Actualizar un user
+PATCH http://localhost:1235/restaurante/users/3
+Content-Type: application/json
+
+{
+  "username": "usuario_actualizado",
+  "password": "contrasegurisisisisima123",
+  "restaurantId": 2,
+  "isActive": 2,
+  "roleId": 2
+}
+###
+# ---------------------------------------------------------------------
+# CONSULTAS DE TABLES
+# ---------------------------------------------------------------------
+### Obtener tables
+GET http://localhost:1235/restaurante/tables
+### Obtener table por ID
+GET http://localhost:1235/restaurante/tables/1
+### Crear una table
+POST http://localhost:1235/restaurante/tables
+Content-Type: application/json
+
+{
+  "tableNumber": 3,
+  "restaurantId": 1
+}
+### Actualizar una tabla
+PATCH http://localhost:1235/restaurante/tables/8
+Content-Type: application/json
+
+{
+  "tableNumber": 12
+}
+### Borrar tabla
+DELETE http://localhost:1235/restaurante/tables/5
+# ---------------------------------------------------------------------
+# CONSULTAS DE CATEGORIES
+# ---------------------------------------------------------------------
+### Obtener categorias
+GET http://localhost:1235/restaurante/categories
+### Categoria por ID
+GET http://localhost:1235/restaurante/categories/1
+
+### Crear categoria
+POST http://localhost:1235/restaurante/categories
+Content-Type: application/json
+
+{
+  "categoryName": "Nueva categoria2",
+  "restaurantId": 1
+}
+
+### Editar categoria
+PATCH http://localhost:1235/restaurante/categories/1
+Content-Type: application/json
+
+{
+  "categoryName": "Nueva categoria editada"
+}
+### Borrar categoria
+DELETE http://localhost:1235/restaurante/categories/12
+# ---------------------------------------------------------------------
+# CONSULTA DE TABLA MENU
+# ---------------------------------------------------------------------
+### Obtener menus
+GET  http://localhost:1235/restaurante/menu
+### Obtener menu por ID
+GET  http://localhost:1235/restaurante/menu/1
+### Crear menu
+POST  http://localhost:1235/restaurante/menu
+Content-Type: application/json
+
+{
+  "menuName": "Nuevo Menú 1",
+  "restaurantId": 1
+}
+### Actualizar menu
+PATCH http://localhost:1235/restaurante/menu/1
+Content-Type: application/json
+
+{
+  "menuName": "Nueva Menú editada"
+}
+### Borrar menu
+DELETE http://localhost:1235/restaurante/menu/5
+# ---------------------------------------------------------------------
+# CONSULTA DE TABLA ITEMS
+# ---------------------------------------------------------------------
+### Obtener items
+GET http://localhost:1235/restaurante/items
+### Obtener items por ID
+GET http://localhost:1235/restaurante/items/1
+### Crear un item 
+POST http://localhost:1235/restaurante/items
+Content-Type: application/json
+
+{
+  "name": "Nuevo Item 2",
+  "description": "Descripción del item 2",
+  "price": 10.5,
+  "categoryId": 1,
+  "restaurantId": 1
+}
+### Editar un item
+PATCH http://localhost:1235/restaurante/items/1
+Content-Type: application/json
+
+{
+  "name": "Actualizado Item 2",
+  "description": "Descripción del item Actualizado 2",
+  "price": 10,
+  "categoryId": 2,
+  "restaurantId": 1
+}
+### Borrar item
+DELETE http://localhost:1235/restaurante/items/4
+
+# ---------------------------------------------------------------------
+### Obtener menu del dia
+# ---------------------------------------------------------------------
+GET http://localhost:1235/restaurante/menuItems/1
+# ---------------------------------------------------------------------
+### CCONSULTAS DE ORDENES
+# ---------------------------------------------------------------------
+### Crear orden
+POST http://localhost:1235/restaurante/orders
+Content-Type: application/json
+
+{
+  "tableId": 1,
+  "restaurantId": 1,
+  "items": [
+    {
+      "itemId": 1,
+      "quantity": 2
+    },
+    {
+      "itemId": 2,
+      "quantity": 3
+    }
+  ]
+}
+### Actualizar orden
+PATCH http://localhost:1235/restaurante/orders/1
+Content-Type: application/json
+
+{
+  "items": [
+    {
+      "itemId": 1,
+      "quantity": 5
+    },
+    {
+      "itemId": 3,
+      "quantity": 2
+    }
+  ]
+}
+### Actualizar total precio
+PATCH http://localhost:1235/restaurante/orders/1/total-price
+Content-Type: application/json
+
+{
+  "totalPrice": 25.5
+}
+### Borrar orden
+DELETE http://localhost:1235/restaurante/orders/8
+
+
