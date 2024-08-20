@@ -1,6 +1,6 @@
 import cors from 'cors'
 const ACCEPTED_ORIGINS = [
-  'http://localhost:1235',
+  'http://localhost:1235'
 ]
 
 export const corsMiddleware = ({ acceptedOrigins = ACCEPTED_ORIGINS } = {}) => cors({
