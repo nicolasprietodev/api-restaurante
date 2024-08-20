@@ -185,16 +185,16 @@ export class RestauranteController {
         isActive,
       });
 
-      const newUser = await this.restauranteModel.createUser({
+      const newUser = await this.restauranteModel.createUser1({
         username,
         password,
         roleId,
         restaurantId,
         isActive,
       });
-      console.log("aki", roleId);
-
+      
       res.status(201).json(newUser);
+      console.log("aki", roleId);
     } catch (error) {
       console.error("Error en el controlador createUser:", error);
       res.status(500).json({ error: error.message });

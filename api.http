@@ -66,23 +66,23 @@ POST http://localhost:1235/restaurante/users
 Content-Type: application/json
 
 {
-  "username": "nuevo_usuario35",
-  "password": "contrasegurisisisisima123",
+  "username": "Toño111111111121",
+  "password": "pepit",
   "restaurantId": 1,
   "roleId": 1,
   "isActive": 1
 }
 
 ### Actualizar un user
-PATCH http://localhost:1235/restaurante/users/3
+PATCH https://api-restaurante-7ed4.onrender.com/restaurante/users/46
 Content-Type: application/json
 
 {
-  "username": "usuario_actualizado",
+  "username": "Nicolas",
   "password": "contrasegurisisisisima123",
   "restaurantId": 2,
   "isActive": 2,
-  "roleId": 2
+  "roleId": 1
 }
 ###
 # ---------------------------------------------------------------------

@@ -255,6 +255,8 @@ export class RestauranteModel {
       if (users.length === 0) {
         throw new Error("No users found");
       }
+      console.log('todos roles');
+      
 
       return users;
     } catch (error) {
@@ -306,46 +308,43 @@ export class RestauranteModel {
       throw error;
     }
   }
-  static async createUser({
+  static async createUser1({
     username,
     password,
     roleId,
     restaurantId,
     isActive,
   }) {
-    console.log('POR FAVOR FUNCXIONA');
-    const connection = await pool.getConnection();
-
+    const connection = await pool.getConnection(); 
+    console.log('conexion', connection);
+    
     try {
       console.log("Iniciando la creación del usuario");
-
-      const connection = await pool.getConnection();
-
       await connection.beginTransaction();
-
+  
       const [result] = await connection.query(
         `
         INSERT INTO users (username, password, restaurant_id, is_active)
         VALUES (?, ?, ?, ?)`,
         [username, password, restaurantId, isActive]
       );
-
+  
       const userId = result.insertId;
       console.log("Usuario creado con ID:", userId);
-
+  
       const query = `
-          INSERT INTO user_roles (user_id, role_id)
-          VALUES (?, ?)`;
-
+        INSERT INTO user_roles (user_id, role_id)
+        VALUES (?, ?)`;
+  
       const values = [userId, roleId];
       console.log("Consulta para insertar rol de usuario:", query);
       console.log("Valores:", values);
-
+  
       const [roleResult] = await connection.query(query, values);
       console.log("Rol de usuario insertado con ID:", roleResult.insertId);
-
-      await connection.commit();
-
+  
+      await connection.commit(); 
+  
       return {
         userId,
         username,
@@ -354,13 +353,67 @@ export class RestauranteModel {
         isActive,
       };
     } catch (error) {
-      await connection.rollback();
-      console.error("Error creating user and user role relationship:", error);
+      await connection.rollback(); 
+      console.error("Error creando usuario y la relación de roles:", error);
       throw error;
     } finally {
-      connection.release();
+      connection.release(); 
     }
   }
+
+  // static async createUser({
+  //   username,
+  //   password,
+  //   roleId,
+  //   restaurantId,
+  //   isActive,
+  // }) {
+  //   const connection = await pool.getConnection(); 
+  //   console.log('conexion', connection);
+    
+  //   try {
+  //     console.log("Iniciando la creación del usuario");
+  //     await connection.beginTransaction();
+  
+  //     const [result] = await connection.query(
+  //       `
+  //       INSERT INTO users (username, password, restaurant_id, is_active)
+  //       VALUES (?, ?, ?, ?)`,
+  //       [username, password, restaurantId, isActive]
+  //     );
+  
+  //     const userId = result.insertId;
+  //     console.log("Usuario creado con ID:", userId);
+  
+  //     const query = `
+  //       INSERT INTO user_roles (user_id, role_id)
+  //       VALUES (?, ?)`;
+  
+  //     const values = [userId, roleId];
+  //     console.log("Consulta para insertar rol de usuario:", query);
+  //     console.log("Valores:", values);
+  
+  //     const [roleResult] = await connection.query(query, values);
+  //     console.log("Rol de usuario insertado con ID:", roleResult.insertId);
+  
+  //     await connection.commit(); 
+  
+  //     return {
+  //       userId,
+  //       username,
+  //       restaurantId,
+  //       roleId,
+  //       isActive,
+  //     };
+  //   } catch (error) {
+  //     await connection.rollback(); 
+  //     console.error("Error creando usuario y la relación de roles:", error);
+  //     throw error;
+  //   } finally {
+  //     connection.release(); 
+  //   }
+  // }
+  
 
   static async updateUser({ userId, username, password, roleId, isActive }) {
     const connection = await pool.getConnection();
