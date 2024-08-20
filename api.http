@@ -58,7 +58,7 @@ DELETE http://localhost:1235/restaurante/roles/3
 # CONSULTAS DE USERS
 # ---------------------------------------------------------------------
 ### Obtener users
-GET http://localhost:1235/restaurante/users
+GET https://api-restaurante-r1b3.onrender.com/restaurante/users
 ### Obtener user por ID
 GET http://localhost:1235/restaurante/users/1
 ### Crear un user

@@ -316,10 +316,8 @@ export class RestauranteModel {
     isActive,
   }) {
     const connection = await pool.getConnection(); 
-    console.log('conexion', connection);
     
     try {
-      console.log("Iniciando la creación del usuario");
       await connection.beginTransaction();
   
       const [result] = await connection.query(
@@ -330,18 +328,15 @@ export class RestauranteModel {
       );
   
       const userId = result.insertId;
-      console.log("Usuario creado con ID:", userId);
   
       const query = `
         INSERT INTO user_roles (user_id, role_id)
         VALUES (?, ?)`;
   
       const values = [userId, roleId];
-      console.log("Consulta para insertar rol de usuario:", query);
-      console.log("Valores:", values);
+
   
       const [roleResult] = await connection.query(query, values);
-      console.log("Rol de usuario insertado con ID:", roleResult.insertId);
   
       await connection.commit(); 
   
